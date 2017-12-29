@@ -22,7 +22,7 @@ public class SpiderDataByJson {
 	static StringBuilder sb = new StringBuilder();
 	static final String FILE_NAME = "number";
 	
-	static String url = "https://m.10010.com/NumApp/NumberCenter/qryNum?callback=jsonp_queryMoreNums&provinceCode=31&cityCode=310&monthFeeLimit=0&groupKey=1500263519&searchCategory=3&net=01&amounts=200&codeTypeCode=&searchValue=&qryType=02&goodsNet=4&_=1514523545992"; 
+	static String url = "https://m.10010.com/NumApp/NumberCenter/qryNum?callback=jsonp_queryMoreNums&provinceCode=31&cityCode=310&monthFeeLimit=0&groupKey=1500263519&searchCategory=1&net=01&amounts=200&codeTypeCode=&searchValue=&qryType=02&goodsNet=4&_=1514523545992"; 
 	
 	public static void main(String[] args) {
 		try {
