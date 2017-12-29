@@ -22,40 +22,33 @@ public class SpiderDataByJson {
 	static StringBuilder sb = new StringBuilder();
 	static final String FILE_NAME = "number";
 	
-	static String url = "https://m.10010.com/NumApp/NumberCenter/qryNum?"
-    		+ "callback=jsonp_queryMoreNums"
-    		+ "&provinceCode=31"
-    		+ "&cityCode=310"
-    		+ "&monthFeeLimit=0"
-    		+ "&groupKey=1500263519"
-    		+ "&searchCategory=3"
-    		+ "&net=01"
-    		+ "&amounts=200"
-    		+ "&codeTypeCode="
-    		+ "&searchValue="
-    		+ "&qryType=02"
-    		+ "&goodsNet=4"
-    		+ "&_=1514444440411"; 
+	static String url = "https://m.10010.com/NumApp/NumberCenter/qryNum?callback=jsonp_queryMoreNums&provinceCode=31&cityCode=310&monthFeeLimit=0&groupKey=1500263519&searchCategory=3&net=01&amounts=200&codeTypeCode=&searchValue=&qryType=02&goodsNet=4&_=1514523545992"; 
 	
 	public static void main(String[] args) {
-		for (int i=0;i<1000;i++){
-			String numArrayJson = loadJson(url).substring(20, loadJson(url).length()-2);
-			addNumberToSet(getNumArray(numArrayJson));
+		try {
+			for (int i=0;i<100;i++){
+				String numArrayJson = loadJson(url).substring(20, loadJson(url).length()-2);
+				addNumberToSet(getNumArray(numArrayJson));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.getMessage();
+		}finally {
+			System.out.println("经过筛选去重，共有"+set.size()+"条可用号码");
+			list.addAll(set);
+			Collections.sort(list);
+			System.out.println("排序完成");
+			if (set.isEmpty()){
+				System.out.println("没获取到数据");
+				return;
+			}
+			System.out.println("正在写入到文件"+FILE_NAME);
+			for (String i : list){
+				sb.append(i+"\n");
+			}
+			FileIo.writeFile("\\"+FILE_NAME+".txt",sb.toString() );
+			System.out.println("写入完毕");
 		}
-		System.out.println("经过筛选去重，共有"+set.size()+"条可用号码");
-		list.addAll(set);
-		Collections.sort(list);
-		System.out.println("排序完成");
-		if (set.isEmpty()){
-			System.out.println("没获取到数据");
-			return;
-		}
-		System.out.println("正在写入到文件"+FILE_NAME);
-		for (String i : list){
-        	sb.append(i+"\n");
-        }
-        FileIo.writeFile("\\"+FILE_NAME+".txt",sb.toString() );
-        System.out.println("写入完毕");
 	}
 	
 	public static String loadJson (String url) {  
